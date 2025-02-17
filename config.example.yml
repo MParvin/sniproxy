@@ -1,0 +1,12 @@
+general:
+  log_level: "info"
+  upstream_dns: "8.8.8.8"
+  bind_dns_over_udp: ":53"
+  bind_dns_over_tcp: ":53"
+  bind_dns_over_tls: ":853"
+  bind_dns_over_quic: ":784"
+  bind_http: ":80"
+  bind_https: ":443"
+  prometheus: ":9090"
+  preferred_version: "dualstack"
+  allow_conn_to_local: false
