@@ -10,3 +10,5 @@ general:
   prometheus: ":9090"
   preferred_version: "dualstack"
   allow_conn_to_local: false
+  public_ipv4: "x.x.x.x"
+  
