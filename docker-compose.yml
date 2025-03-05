@@ -1,0 +1,33 @@
+name: sniproxy
+services:
+  sniproxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sniproxy
+    restart: unless-stopped
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "853:853/tcp"
+      - "784:784/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+      - "9090:9090/tcp"
+    volumes:
+      - ./cidr.csv:/app/cidr.csv
+      - ./domains.csv:/app/domains.csv
+      - ./config.yml:/app/config.yml
+    networks:
+      - sniproxy_network
+    command: ["--config", "/app/config.yml"]
+    healthcheck:
+      test: ["CMD", "curl", "-sSLI 127.0.0.1 -H 'Host: api.tatum.io'"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 3
+      start_period: 30s
+
+networks:
+  sniproxy_network:
+    driver: bridge
